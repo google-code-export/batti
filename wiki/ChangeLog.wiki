@@ -9,4 +9,5 @@ released on July 18, 2008
 
  * FIX: Multiple Info dialogs when tapping on the indicator
  * FIX: Tap on Adjust settings closes info dialog
+ * FIX: Correction coeficients are working again
  * ADD: support for !AppToDate
