@@ -5,23 +5,26 @@
 
 PRODUCT=Batti
 VERSION=2.3
-INF=batti.inf
+INF=Batti.inf
 
 CABWIZ="c:/program files/windows ce tools/wce420/pocket pc 2003/tools/cabwiz.exe"
 ZIP="c:/program files/unxutils/usr/local/wbin/zip.exe"
 
-all: cab
+all: cab zip
 
-cab: $(PRODUCT).ARM.CAB
+cab: $(PRODUCT)-$(VERSION).cab
+
+$(PRODUCT)-$(VERSION).cab: $(PRODUCT).ARM.CAB
+	mv -f $(PRODUCT).ARM.CAB $(PRODUCT)-$(VERSION).cab
 
 $(PRODUCT).ARM.CAB: $(INF)
 	$(CABWIZ) $(INF) /cpu ARM
 
-zip: $(PRODUCT).ARM.CAB
-	cp $(PRODUCT).ARM.CAB $(PRODUCT)-$(VERSION).ARM.cab
-	$(ZIP) -m $(PRODUCT)-$(VERSION).zip $(PRODUCT)-$(VERSION).ARM.cab
+zip: $(PRODUCT)-$(VERSION).cab
+	$(ZIP) $(PRODUCT)-$(VERSION).zip $(PRODUCT)-$(VERSION).cab
 
 dist:
+	$(PRODUCT)-$(VERSION).cab
 
 clean:
 	rm -f *.DAT
