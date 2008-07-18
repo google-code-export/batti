@@ -1,0 +1,74 @@
+;
+; This is an installation file
+;
+; by David Andrs, 2005
+
+[Version]
+	Signature = "$Windows NT$"
+	Provider = "David Andrs"
+	CESignature = "$Windows CE$"
+
+[CEDevice]
+	UnsupportedPlatforms = "HPC","HPC Pro"
+	VersionMin           = 3.0
+	VersionMax           = 10000.0
+
+[CEStrings]
+	AppName = "Batti"
+	InstallDir = "%CE1%\%AppName%"
+
+[Strings]
+	RegPath = "Software\DaProfik\Batti"
+
+[Shortcuts]
+	"Batti Settings",0,batticfg.exe
+
+[DestinationDirs]
+	Shortcuts                      = ,%CE11%
+	Files.ARM                      = ,%InstallDir%
+
+;
+; ARM
+;
+[CEDevice.ARM]
+	ProcessorType = 2577
+	BuildMax=0xE0000000
+
+[SourceDisksNames.ARM]
+	1 = ,"Batti",,..\batti\prj\armv4rel
+	2 = ,"Config",,..\batticfg\prj\armv4rel
+	3 = ,"Setup",,..\setup\prj\armv4rel
+	4 = ,"License",,..
+	5 = ,"Apptodate",,..\apptodate
+
+[SourceDisksFiles.ARM]
+	Batti.exe = 1
+	batticfg.exe = 2
+	setup.dll = 3
+	COPYING = 4
+	apptodate.xml = 5
+
+[DefaultInstall.ARM]
+	CEShortcuts  = Shortcuts
+	CESetupDLL   = "setup.dll"
+	CopyFiles    = Files.ARM
+	AddReg       = AddRegSection.ARM,AppToDate
+
+[Files.ARM]
+	batti.exe,,,0x80000000
+	batticfg.exe,,,0x80000000
+	COPYING,,,0x80000000
+	apptodate.xml,,,0x80000000
+
+[AddRegSection.ARM]
+;	HKCU,%RegPath%,ColorFg,0x00010003,0x00FF8A63
+;	HKCU,%RegPath%,ColorBg,0x00010003,0x009C2400
+;	HKCU,%RegPath%,ColorFrame,0x00010003,0x00390000
+;	HKCU,%RegPath%,Seconds,0x00010003,0x00000002
+
+;
+; AppToDate
+; 
+[AppToDate]
+	HKCU,Software\Modaco\AppToDate\XML,Batti,0x00000000,%InstallDir%\apptodate.xml
+
