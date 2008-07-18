@@ -15,7 +15,7 @@
 || http://pda.jasnapaka.com/gfx/flags/polish.gif     || Polish || [http://batti.googlecode.com/svn/trunk/lang/polish.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/portuguese.gif || Portuguese || [http://batti.googlecode.com/svn/trunk/lang/portuguese.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/russian.gif    || Russian || [http://batti.googlecode.com/svn/trunk/lang/russian.lng Download]  || 2.1 ||
-|| http://pda.jasnapaka.com/gfx/flags/slovak.gif     || Slovak || [http://batti.googlecode.com/svn/trunk/lang/slovak.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/slovakian.gif     || Slovakian || [http://batti.googlecode.com/svn/trunk/lang/slovak.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/spanish.gif    || Spanish || [http://batti.googlecode.com/svn/trunk/lang/spanish.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/thai.gif       || Thai || [http://batti.googlecode.com/svn/trunk/lang/thai.lng Download]  || 1.4.1 ||
 || http://pda.jasnapaka.com/gfx/flags/turkish.gif    || Turkish || [http://batti.googlecode.com/svn/trunk/lang/turkish.lng Download]  || 2.1 ||
