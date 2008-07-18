@@ -1,0 +1,12 @@
+#summary ChangeLog
+#labels Featured
+
+= !ChangeLog =
+----
+
+== Version 2.3 ==
+released on July 18, 2008
+
+ * FIX: Multiple Info dialogs when tapping on the indicator
+ * FIX: Tap on Adjust settings closes info dialog
+ * ADD: support for !AppToDate
