@@ -1,6 +1,9 @@
 #summary Frequently Asked Questions
 #labels Featured
 
+=Frequently Asked Questions=
+----
+
 *How can I assign my own sound for a sound event?*
 
 You have to put your sound file to {{{\windows}}} folder. Then start *Batti Configuration* and assign the sound for the event on *Advanced* page.
