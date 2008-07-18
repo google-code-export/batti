@@ -25,7 +25,7 @@
 == How to Use Localization file ==
 
   # Install Batti (see [http://code.google.com/p/batti/wiki/Install installation guide] for details).
-  # Download appropriate language file and rename it to {{{default.lng}}
+  # Download appropriate language file and rename it to {{{default.lng}}}
   # Upload this file onto your PocketPC device where you installed Batti.
 
 If you miss Batti in you native language, look below how to localize it.
