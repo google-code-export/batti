@@ -1,0 +1,18 @@
+#summary How to install Batti
+#labels Featured
+
+=Installing=
+
+==Installing Zipped CAB File==
+
+  # Before installing, make sure that your device meets [SystemRequirements system requirements].
+  # Download and unzip *Batti*.
+  # Upload unzipped *cab file* to your PocketPC.
+  # Tap the *cab file* on your PocketPC to install.
+
+
+=Uninstalling=
+
+  # Tap *Start | Settings*, select *System* tab and tap *Remove programs*.
+  # Find *Batti* in the program list.
+  # Tap *Remove*.
