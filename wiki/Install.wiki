@@ -2,6 +2,7 @@
 #labels Featured
 
 =Installing=
+----
 
 ==Installing Zipped CAB File==
 
@@ -12,6 +13,7 @@
 
 
 =Uninstalling=
+----
 
   # Tap *Start | Settings*, select *System* tab and tap *Remove programs*.
   # Find *Batti* in the program list.
