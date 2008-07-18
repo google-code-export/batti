@@ -1,13 +1,37 @@
-#summary Information related to localizations.
+﻿#summary Information related to localizations.
 #labels Featured
 
 =Localized Versions=
+----
+ 
+|| || *Language* || || *Version* ||
+|| http://pda.jasnapaka.com/gfx/flags/czech.gif      || Czech || [http://batti.googlecode.com/svn/trunk/lang/czech.lng Download]  || 2.3 ||
+|| http://pda.jasnapaka.com/gfx/flags/dutch.gif      || Dutch || [http://batti.googlecode.com/svn/trunk/lang/dutch.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/french.gif     || French || [http://batti.googlecode.com/svn/trunk/lang/french.lng Download]  || 2.0 ||
+|| http://pda.jasnapaka.com/gfx/flags/german.gif     || German || [http://batti.googlecode.com/svn/trunk/lang/german.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/hungarian.gif  || Hungarian || [http://batti.googlecode.com/svn/trunk/lang/hungarian.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/italian.gif    || Italian || [http://batti.googlecode.com/svn/trunk/lang/italian.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/macedonian.gif || Macedonian || [http://batti.googlecode.com/svn/trunk/lang/macedonian.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/polish.gif     || Polish || [http://batti.googlecode.com/svn/trunk/lang/polish.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/portuguese.gif || Portuguese || [http://batti.googlecode.com/svn/trunk/lang/portuguese.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/russian.gif    || Russian || [http://batti.googlecode.com/svn/trunk/lang/russian.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/slovak.gif     || Slovak || [http://batti.googlecode.com/svn/trunk/lang/slovak.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/spanish.gif    || Spanish || [http://batti.googlecode.com/svn/trunk/lang/spanish.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/thai.gif       || Thai || [http://batti.googlecode.com/svn/trunk/lang/thai.lng Download]  || 1.4.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/turkish.gif    || Turkish || [http://batti.googlecode.com/svn/trunk/lang/turkish.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/ukrainian.gif  || Ukrainian || [http://batti.googlecode.com/svn/trunk/lang/ukrainian.lng Download]  || 2.1 ||
 
-See [http://code.google.com/p/batti/downloads/list Downloads] section for localized versions of Batti.
+
+== How to Use Localization file ==
+
+  # Install Batti (see [http://code.google.com/p/batti/wiki/Install installation guide] for details).
+  # Download appropriate language file and rename it to {{{default.lng}}
+  # Upload this file onto your PocketPC device where you installed Batti.
 
 If you miss Batti in you native language, look below how to localize it.
 
 =Localization Guide=
+----
 
 This mini-guide helps you to localize Batti.
 
@@ -17,5 +41,5 @@ This mini-guide helps you to localize Batti.
   # Translate every line (do not change the numbers).
   # Save this file as Unicode text, not UTF-8 (Notepad from Windows 2000 and later has this ability).
   # Send the translated file to [http://groups.google.com/group/batti-devel batti-devel] group.
-   * It is important to send the file as an *attachment* to avoid mail delivery problems.
-   * Also it is useful to fill in the Subject field with something meaningful - good subject is for example *Czech localization for Batti <version>*.
+    * It is important to send the file as an *attachment* to avoid mail delivery problems.
+    * Also it is useful to fill in the Subject field with something meaningful - good subject is for example *Czech localization for Batti <version>*.
