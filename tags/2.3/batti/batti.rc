@@ -1,0 +1,282 @@
+//Microsoft eMbedded Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "newres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Czech resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CSY)
+#ifdef _WIN32
+LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MAIN                ICON    DISCARDABLE     "res\\main.ico"
+IDI_POWEROFF            ICON    DISCARDABLE     "res\\poweroff.ico"
+IDI_INFO                ICON    DISCARDABLE     "res\\info.ico"
+IDI_TRAY_BATTERY        ICON    DISCARDABLE     "res\\tray.ico"
+IDI_TRAY_AC             ICON    DISCARDABLE     "res\\tray_ac.ico"
+IDI_BATTERY             ICON    DISCARDABLE     "res\\battery.ico"
+#endif    // Czech resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,3,0,0
+ PRODUCTVERSION 2,3,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040504b0"
+        BEGIN
+            VALUE "Comments", "\0"
+            VALUE "CompanyName", "David Andrs\0"
+            VALUE "FileDescription", "batti\0"
+            VALUE "FileVersion", "2, 3, 0, 0\0"
+            VALUE "InternalName", "batti\0"
+            VALUE "LegalCopyright", "Copyright © 2005 - 2008\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "batti.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", "Batti\0"
+            VALUE "ProductVersion", "2, 3, 0, 0\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x405, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// CEUX
+//
+
+HI_RES_AWARE CEUX DISCARDABLE 
+BEGIN
+    0x0001
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menubar
+//
+
+IDR_MAIN MENU DISCARDABLE 
+BEGIN
+    POPUP "app"
+    BEGIN
+        MENUITEM "Info...",                     ID_APP_INFO
+        MENUITEM "Settings...",                 ID_APP_SETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "Exit",                        ID_APP_EXIT
+    END
+END
+
+IDR_CLOSE MENU DISCARDABLE 
+BEGIN
+    MENUITEM "Close",                       IDCANCEL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Data
+//
+
+IDR_MAIN SHMENUBAR DISCARDABLE 
+BEGIN
+    IDR_MAIN, 1,
+    I_IMAGENONE, ID_APP, TBSTATE_ENABLED, 
+    TBSTYLE_DROPDOWN | TBSTYLE_AUTOSIZE, IDS_CAP_APP, 0, 0,
+END
+
+IDR_CLOSE SHMENUBAR DISCARDABLE 
+BEGIN
+    IDR_CLOSE, 1,
+    I_IMAGENONE, IDCANCEL, TBSTATE_ENABLED, TBSTYLE_AUTOSIZE, IDS_CAP_CLOSE, 
+    0, NOMENU,
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""newres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_INFO DIALOG DISCARDABLE  0, 0, 160, 170
+STYLE DS_SETFOREGROUND | WS_POPUP | WS_VISIBLE | WS_CAPTION
+CAPTION "Battery"
+FONT 8, "Tahoma"
+BEGIN
+    LTEXT           "Main Battery:",IDC_C_MAIN_BATTERY,32,7,60,9
+    RTEXT           "LiIon",IDC_CHEMISTRY,92,7,35,9
+    LTEXT           "Backup Battery:",IDC_C_BACKUP_BATTERY,32,68,95,9
+    RTEXT           "100 %",IDC_BACKUP_PERCENT_NUM,127,80,26,9
+    CONTROL         "Progress1",IDC_MAIN_PERCENT,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,32,28,95,9
+    CONTROL         "Progress1",IDC_BACKUP_PERCENT,"msctls_progress32",
+                    PBS_SMOOTH | WS_BORDER,32,80,95,9
+    RTEXT           "100 %",IDC_MAIN_PERCENT_NUM,127,28,26,9
+    LTEXT           "Temperature:",IDC_C_TEMPERATURE,32,49,60,9
+    RTEXT           "27.4 C",IDC_TEMPERATURE,94,49,33,9
+    LTEXT           "Voltage:",IDC_C_VOLTAGE,32,39,60,9
+    RTEXT           "27.4 V",IDC_VOLTAGE,94,39,33,9
+    LTEXT           "Voltage:",IDC_C_BACKUP_VOLTAGE,32,91,60,9
+    RTEXT           "1.74 V",IDC_BACKUP_VOLTAGE,94,91,33,9
+    LTEXT           "Status",IDC_STATUS,32,17,95,9
+    RTEXT           "Adjust settings",IDC_SETTINGS,80,153,76,8,SS_NOTIFY
+    ICON            IDI_BATTERY,IDC_STATIC,4,8,20,20
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_INFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 156
+        VERTGUIDE, 32
+        VERTGUIDE, 92
+        VERTGUIDE, 127
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 166
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_BATTI_NOTICIFATION  "Batti Notification"
+    IDS_NOTIFICATION        "The device will be turned off in %d second(s)."
+    IDS_POWEROFF            "Power-Off"
+    IDS_DISMISS             "Dismiss"
+    IDS_SNOOZE              "Snooze"
+    IDS_HIDE                "Hide"
+    IDS_BATTERY_INFO        "Battery Info"
+    IDS_SETTINGS            "Settings"
+    IDS_MAIN_BATTERY        "Main Battery"
+    IDS_ONBATTERY           "On Battery"
+    IDS_CHARGING            "Charging"
+    IDS_ON_AC               "On AC"
+    IDS_PERCENT             "Percent:"
+    IDS_UNKNOWN             "Unknown"
+    IDS_VOLTAGE             "Voltage:"
+    IDS_TEMPERATURE         "Temperature:"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CHEMISTRY           "Chemistry:"
+    IDS_BACKUP_BATTERY      "Backup Battery"
+    IDS_BATTI               "Batti"
+    IDS_REMAINING           "Remaining power"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_CAP_EXIT            "A"
+    IDS_CAP_APP             "app"
+    IDS_CAP_CLOSE           "Close"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
