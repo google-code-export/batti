@@ -26,6 +26,15 @@
 [DestinationDirs]
 	Shortcuts                      = ,%CE11%
 	Files.ARM                      = ,%InstallDir%
+	Files.Localization             = ,%InstallDir%
+
+[SourceDisksNames]
+	1 = ,"Batti",,..\batti\prj\armv4rel
+	2 = ,"Config",,..\batticfg\prj\armv4rel
+	3 = ,"Setup",,..\setup\prj\armv4rel
+	4 = ,"License",,..
+	5 = ,"Apptodate",,..\apptodate
+	6 = ,"Language file",,.
 
 ;
 ; ARM
@@ -33,13 +42,6 @@
 [CEDevice.ARM]
 	ProcessorType = 2577
 	BuildMax=0xE0000000
-
-[SourceDisksNames.ARM]
-	1 = ,"Batti",,..\batti\prj\armv4rel
-	2 = ,"Config",,..\batticfg\prj\armv4rel
-	3 = ,"Setup",,..\setup\prj\armv4rel
-	4 = ,"License",,..
-	5 = ,"Apptodate",,..\apptodate
 
 [SourceDisksFiles.ARM]
 	Batti.exe = 1
@@ -71,4 +73,24 @@
 ; 
 [AppToDate]
 	HKCU,Software\Modaco\AppToDate\XML,Batti,0x00000000,%InstallDir%\apptodate.xml
+
+;
+; Localization
+;
+[DefaultInstall.ARM.Localized]
+	CEShortcuts  = Shortcuts
+	CESetupDLL   = "setup.dll"
+	CopyFiles    = Files.ARM,Files.Localization
+	AddReg       = AddRegSection.ARM,AppToDate
+
+[SourceDisksFiles.ARM.Localized]
+	Batti.exe = 1
+	batticfg.exe = 2
+	setup.dll = 3
+	COPYING = 4
+	apptodate.xml = 5
+	default.lng = 6
+
+[Files.Localization]
+	default.lng,,,0x80000000
 
