@@ -58,7 +58,22 @@ se:
 	$(ZIP) -m $(PRODUCT)-$(VERSION)-$@.zip $(PRODUCT)-$(VERSION)-$@.cab
 	@rm -f default.lng
 
+es:
+	@cp -f ../lang/spanish.lng default.lng
+	$(CABWIZ) $(INF) /cpu ARM.Localized || sleep 1
+	@mv $(PRODUCT).ARM.Localized.CAB $(PRODUCT)-$(VERSION)-$@.cab
+	$(ZIP) -m $(PRODUCT)-$(VERSION)-$@.zip $(PRODUCT)-$(VERSION)-$@.cab
+	@rm -f default.lng
+
+it:
+	@cp -f ../lang/italian.lng default.lng
+	$(CABWIZ) $(INF) /cpu ARM.Localized || sleep 1
+	@mv $(PRODUCT).ARM.Localized.CAB $(PRODUCT)-$(VERSION)-$@.cab
+	$(ZIP) -m $(PRODUCT)-$(VERSION)-$@.zip $(PRODUCT)-$(VERSION)-$@.cab
+	@rm -f default.lng
+
 clean:
 	rm -f *.DAT
 	rm -f *.CAB
 	rm -f *.zip
+
