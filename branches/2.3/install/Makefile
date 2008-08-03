@@ -72,6 +72,13 @@ it:
 	$(ZIP) -m $(PRODUCT)-$(VERSION)-$@.zip $(PRODUCT)-$(VERSION)-$@.cab
 	@rm -f default.lng
 
+nl:
+	@cp -f ../lang/dutch.lng default.lng
+	$(CABWIZ) $(INF) /cpu ARM.Localized || sleep 1
+	@mv $(PRODUCT).ARM.Localized.CAB $(PRODUCT)-$(VERSION)-$@.cab
+	$(ZIP) -m $(PRODUCT)-$(VERSION)-$@.zip $(PRODUCT)-$(VERSION)-$@.cab
+	@rm -f default.lng
+
 clean:
 	rm -f *.DAT
 	rm -f *.CAB
