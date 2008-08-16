@@ -18,8 +18,8 @@
  *
  */
 
-#include "stdafx.h"
-#include "ce_setup.h"
+#include "StdAfx.h"
+#include <ce_setup.h>
 #include "../share/defs.h"
 #include "../share/helpers.h"
 #include "../share/regs.h"
@@ -55,7 +55,7 @@ void TerminateBatti() {
 
 codeINSTALL_INIT
 Install_Init(HWND hwndParent, BOOL fFirstCall, BOOL fPreviouslyInstalled, LPCTSTR pszInstallDir) {
-	TerminateBatti();	
+	TerminateBatti();
 
 	return codeINSTALL_INIT_CONTINUE;
 }
@@ -123,7 +123,7 @@ Install_Exit(HWND hwndParent, LPCTSTR pszInstallDir, WORD cFailedDirs, WORD cFai
 	swprintf(linkPathName, _T("%s\\batti.lnk"), szStartupFolderPath);
 	::SHCreateShortcut(linkPathName, pathName);
 
-	// run the application 
+	// run the application
 	swprintf(pathName, _T("%s\\%s"), pszInstallDir, BATTI_FILENAME);
 	CreateProcess(pathName, _T("/nodelay"), NULL, NULL, FALSE, 0, NULL, NULL, NULL, &pi);
 
