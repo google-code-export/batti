@@ -18,12 +18,11 @@
  *
  */
 
-//#include "birthdays.h"
-#include "windows.h"
-#include "commctrl.h"
+#include <windows.h>
+#include <commctrl.h>
 #include "Localization.h"
-#include "stdlib.h"
-#include "config.h"
+#include <stdlib.h>
+#include "Config.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -52,7 +51,7 @@ void LocalizeMenubar(HWND hMenuBar) {
 	if (Localization == NULL)
 		return;
 
-	int btnCnt = ::SendMessage(hMenuBar, TB_BUTTONCOUNT, 0, 0); 
+	int btnCnt = ::SendMessage(hMenuBar, TB_BUTTONCOUNT, 0, 0);
 
 	for (int i = 0; i < btnCnt; i++) {
 		TBBUTTON btn;
@@ -66,7 +65,7 @@ void LocalizeMenubar(HWND hMenuBar) {
 		if (str != NULL) {
 			tbButtonInfo.pszText = (LPTSTR) (LPCTSTR) str;
 			tbButtonInfo.cchText = wcslen(str);
-			::SendMessage(hMenuBar, TB_SETBUTTONINFO, btn.idCommand, (LPARAM) &tbButtonInfo); 
+			::SendMessage(hMenuBar, TB_SETBUTTONINFO, btn.idCommand, (LPARAM) &tbButtonInfo);
 		}
 	}
 }
@@ -91,7 +90,7 @@ void LocalizeMenu(HMENU hMenu) {
 				SetMenuItemInfo(hMenu, idx, TRUE, &mii);
 			}
 		}
-		
+
 		idx++;
 
 		mii.cbSize = sizeof(mii);
@@ -225,7 +224,7 @@ TCHAR *CLocalization::GetFileName() {
 
 BOOL CLocalization::Init() {
 	BOOL ret = FALSE;
-	
+
 	TCHAR *fileName = GetFileName();
 	if (fileName != NULL) {
 		ret = Load(fileName);
@@ -284,7 +283,7 @@ BOOL CLocalization::Load(LPCTSTR fileName) {
 /*
 BOOL CLocalization::Update() {
 	BOOL ret = FALSE;
-	
+
 	TCHAR *fileName = GetFileName();
 	if (fileName != NULL) {
 		// get current file time
