@@ -18,14 +18,14 @@
  *
  */
 
-#include "stdafx.h"
-#include "batticfg.h"
+#include "StdAfx.h"
+#include "BattiCfg.h"
 #include "BattiSheet.h"
 
-#include "..\share\Config.h"
-#include "..\share\Localization.h"
-#include "..\share\defs.h"
-#include "..\share\helpers.h"
+#include "../share/Config.h"
+#include "../share/Localization.h"
+#include "../share/defs.h"
+#include "../share/helpers.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

@@ -18,12 +18,12 @@
  *
  */
 
-#include "stdafx.h"
-#include "batticfg.h"
+#include "StdAfx.h"
+#include "BattiCfg.h"
 #include "BattiSheet.h"
 
-#include "..\share\Config.h"
-#include "..\share\Localization.h"
+#include "../share/Config.h"
+#include "../share/Localization.h"
 
 #include "AboutPg.h"
 #include "LicensePg.h"
@@ -71,13 +71,13 @@ void CBattiSheet::Init() {
 
 BOOL CBattiSheet::OnInitDialog() {
 	CCePropertySheet::OnInitDialog();
-	
+
 	SHINITDLGINFO sid;
 	sid.dwMask   = SHIDIM_FLAGS;
 	sid.dwFlags  = SHIDIF_SIZEDLGFULLSCREEN;
 	sid.hDlg     = GetSafeHwnd();
 	SHInitDialog(&sid);
-	
+
 	//
 	LocalizeMenubar(m_hwndCmdBar);
 

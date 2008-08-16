@@ -26,7 +26,7 @@
 #endif // _MSC_VER > 1000
 
 #include "CePropertyPage.h"
-#include "..\share\linkctrl.h"
+#include "../share/LinkCtrl.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutPg dialog

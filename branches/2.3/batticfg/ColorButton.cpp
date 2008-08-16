@@ -18,8 +18,8 @@
  *
  */
 
-#include "stdafx.h"
-#include "batticfg.h"
+#include "StdAfx.h"
+#include "BattiCfg.h"
 #include "ColorButton.h"
 
 #ifdef _DEBUG

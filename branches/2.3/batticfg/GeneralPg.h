@@ -25,7 +25,7 @@
 #pragma once
 #endif // _MSC_VER >= 1000
 
-#include "..\share\Caption.h"
+#include "../share/Caption.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CBattiGeneralPg dialog
