@@ -19,12 +19,12 @@
  */
 
 #include "StdAfx.h"
-#include "Batticfg.h"
+#include "BattiCfg.h"
 #include "AppearancePg.h"
 #include "ColorPickerDlg.h"
 
-#include "..\share\Config.h"
-#include "..\share\Localization.h"
+#include "../share/Config.h"
+#include "../share/Localization.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -118,7 +118,7 @@ void CBattiAppearancePg::OnOK() {
 
 BOOL CBattiAppearancePg::OnSetActive() {
 	Config.Page = 2;
-	
+
 	return CPropertyPage::OnSetActive();
 }
 
@@ -141,7 +141,7 @@ BOOL CBattiAppearancePg::OnInitDialog() {
 	}
 	m_ctlColorName.SetCurSel(0);
 	OnSelendokColorName();
-	
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }

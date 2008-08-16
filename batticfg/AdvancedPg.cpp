@@ -22,8 +22,8 @@
 #include "BattiCfg.h"
 #include "AdvancedPg.h"
 
-#include "..\share\Config.h"
-#include "..\share\Localization.h"
+#include "../share/Config.h"
+#include "../share/Localization.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -49,7 +49,7 @@ CBattiAdvancedPg::CBattiAdvancedPg() : CPropertyPage(CBattiAdvancedPg::IDD) {
 		m_psp.pszTitle = strTitle;
 	}
 
-	UINT nIDs[SOUND_EVENT_COUNT] = { 
+	UINT nIDs[SOUND_EVENT_COUNT] = {
 		IDS_BATTERY_LOW,
 		IDS_BATTERY_CRITICAL,
 		IDS_CHARGING_STARTED,

@@ -18,13 +18,13 @@
  *
  */
 
-#include "stdafx.h"
-#include "batticfg.h"
+#include "StdAfx.h"
+#include "BattiCfg.h"
 #include "ColorPickerDlg.h"
-#include "..\share\uihelper.h"
+#include "../share/UIHelper.h"
 
-#include "..\share\Localization.h"
-#include "..\share\helpers.h"
+#include "../share/Localization.h"
+#include "../share/helpers.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -69,7 +69,7 @@ void CColorCtl::OnPaint() {
 	rc.DeflateRect(1, 1, 1, 1);
 	dc.FillSolidRect(&rc, m_clrColor);
 
-	ValidateRect(NULL);	
+	ValidateRect(NULL);
 }
 
 
@@ -185,7 +185,7 @@ void CLightnessCtl::OnPaint() {
 
 	dc.RestoreDC(save);
 
-	ValidateRect(NULL);	
+	ValidateRect(NULL);
 }
 
 void CLightnessCtl::SetLFromPoint(CPoint &point) {
@@ -196,7 +196,7 @@ void CLightnessCtl::SetLFromPoint(CPoint &point) {
 
 void CLightnessCtl::UpdateMe(CPoint &point) {
 	SetLFromPoint(point);
-	
+
 	CRect rc;
 	GetClientRect(&rc);
 	rc.left = rc.right - THUMB_WD;
@@ -336,7 +336,7 @@ void CHSCtl::OnPaint() {
 
 	dc.RestoreDC(save);
 
-	ValidateRect(NULL);	
+	ValidateRect(NULL);
 }
 
 void CHSCtl::SetHSFromPoint(CPoint &point) {
@@ -451,7 +451,7 @@ END_MESSAGE_MAP()
 BOOL CColorPickerDlg::OnInitDialog() {
 	CCeDialog::OnInitDialog();
 	LocalizeDialog(GetSafeHwnd(), IDD);
-	
+
 /*	// create menu
 	BOOL fSuccess;
 	SHMENUBARINFO mbi = { 0 };
@@ -473,9 +473,9 @@ BOOL CColorPickerDlg::OnInitDialog() {
 	str.LoadString(IDS_CANCEL);
 	tbButtonInfo.pszText = (LPTSTR) (LPCTSTR) str;
 	tbButtonInfo.cchText = str.GetLength();
-	::SendMessage(mbi.hwndMB, TB_SETBUTTONINFO, IDCANCEL, (LPARAM) &tbButtonInfo); 
+	::SendMessage(mbi.hwndMB, TB_SETBUTTONINFO, IDCANCEL, (LPARAM) &tbButtonInfo);
 */
-	// better spin buttons	
+	// better spin buttons
 	m_ctlRspin.SendMessage(CCM_SETVERSION, COMCTL32_VERSION);
 	m_ctlGspin.SendMessage(CCM_SETVERSION, COMCTL32_VERSION);
 	m_ctlBspin.SendMessage(CCM_SETVERSION, COMCTL32_VERSION);
@@ -488,7 +488,7 @@ BOOL CColorPickerDlg::OnInitDialog() {
 	m_ctlRspin.SetRange(0, 255);
 	m_ctlGspin.SetRange(0, 255);
 	m_ctlBspin.SetRange(0, 255);
-	
+
 	m_ctlHspin.SetRange(0, 360);
 	m_ctlSspin.SetRange(0, 255);
 	m_ctlLspin.SetRange(0, 255);
@@ -624,18 +624,18 @@ void CColorPickerDlg::UpdateRGB() {
 
 void CColorPickerDlg::OnDeltaposHspin(NMHDR* pNMHDR, LRESULT* pResult) {
 	NM_UPDOWN* pNMUpDown = (NM_UPDOWN*)pNMHDR;
-	UpdateRGB();	
+	UpdateRGB();
 	*pResult = 0;
 }
 
 void CColorPickerDlg::OnDeltaposSspin(NMHDR* pNMHDR, LRESULT* pResult) {
 	NM_UPDOWN* pNMUpDown = (NM_UPDOWN*)pNMHDR;
-	UpdateRGB();	
+	UpdateRGB();
 	*pResult = 0;
 }
 
 void CColorPickerDlg::OnDeltaposLspin(NMHDR* pNMHDR, LRESULT* pResult) {
 	NM_UPDOWN* pNMUpDown = (NM_UPDOWN*)pNMHDR;
-	UpdateRGB();	
+	UpdateRGB();
 	*pResult = 0;
 }

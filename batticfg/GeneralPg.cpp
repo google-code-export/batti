@@ -18,12 +18,12 @@
  *
  */
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "BattiCfg.h"
 #include "GeneralPg.h"
 
-#include "..\share\Config.h"
-#include "..\share\Localization.h"
+#include "../share/Config.h"
+#include "../share/Localization.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -129,7 +129,7 @@ void CBattiGeneralPg::OnOK() {
 
 BOOL CBattiGeneralPg::OnSetActive() {
 	Config.Page = 0;
-	
+
 	return CPropertyPage::OnSetActive();
 }
 

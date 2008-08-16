@@ -22,8 +22,8 @@
 #include "BattiCfg.h"
 #include "AboutPg.h"
 
-#include "..\share\Config.h"
-#include "..\share\Localization.h"
+#include "../share/Config.h"
+#include "../share/Localization.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -102,7 +102,7 @@ void CAboutPg::OnHomepageLink() {
 /*
 HBRUSH CAboutPg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor) {
 	HBRUSH hbr = CCePropertyPage::OnCtlColor(pDC, pWnd, nCtlColor);
-	
+
 	if (pWnd == &m_ctlHomepageLink) {
 		pDC->SetTextColor(rgbLinkColor);
 	}

@@ -18,7 +18,7 @@
  *
  */
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "BattiCfg.h"
 #include "CePropertyPage.h"
 #include "../share/Localization.h"
