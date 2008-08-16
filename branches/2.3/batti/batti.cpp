@@ -759,7 +759,7 @@ void DrawGradient(HDC hDC, RECT &rc, RECT &rcClip, SYSTEM_POWER_STATUS_EX2 &sps)
 		}
 
 		if (batX > lowX) {
-			RECT rcNorm = { lowX, rc.top, min(rc.left, batX), rc.bottom };
+			RECT rcNorm = { lowX, rc.top, min(rc.right, batX), rc.bottom };
 			IntersectRect(&r, &rcNorm, &rcClip);
 
 			int w = wd * (100 - Config.LowLevel) / 100;
