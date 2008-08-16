@@ -18,7 +18,7 @@
  *
  */
 
-#include "stdafx.h"
+#include "StdAfx.h"
 #include "resource.h"
 #include "../share/helpers.h"
 #include "../share/defs.h"
@@ -104,7 +104,7 @@ HANDLE hLogFile = NULL;
 
 // power-off notification
 // {4B357C8D-0D38-4134-B422-915B04AE8478}
-static const GUID CLSID_PowerOffNotification = 
+static const GUID CLSID_PowerOffNotification =
 	{ 0x4b357c8d, 0xd38, 0x4134, { 0xb4, 0x22, 0x91, 0x5b, 0x4, 0xae, 0x84, 0x78 } };
 
 SHNOTIFICATIONDATAEX PowerOffSND = { 0 };
@@ -342,7 +342,7 @@ void ShowInfo(HWND hDlg) {
 		else
 			sText = _T("");
 		SendDlgItemMessage(hDlg, IDC_BACKUP_PERCENT_NUM, WM_SETTEXT, 0, (LPARAM) sText);
-		
+
 		// voltage
 		swprintf(str, _T("%.3lf V"), (Config.CBackupVoltage * sps.BackupBatteryVoltage) / 1000.0);
 		sText = str;
@@ -578,7 +578,7 @@ void DrawSolidRect(HDC hDC, int left, int top, int right, int bottom, COLORREF c
 	HGDIOBJ oldBrush = SelectObject(hDC, br);
 
 	Rectangle(hDC, left, top, right, bottom);
-	
+
 	SelectObject(hDC, oldBrush);
 	DeleteObject(br);
 
@@ -586,7 +586,7 @@ void DrawSolidRect(HDC hDC, int left, int top, int right, int bottom, COLORREF c
 	DeleteObject(pen);
 }
 
-void DrawFlat(HDC hDC, RECT &rc, SYSTEM_POWER_STATUS_EX2 &sps) {
+void DrawFlat(HDC hDC, RECT &rc, RECT &rcClip, SYSTEM_POWER_STATUS_EX2 &sps) {
 	// draw bar
 	COLORREF clrFg;
 	COLORREF clrBg;
@@ -627,18 +627,25 @@ void DrawFlat(HDC hDC, RECT &rc, SYSTEM_POWER_STATUS_EX2 &sps) {
 			break;
 	}
 
-	int batPercent;
+	RECT r;
+	int wd = rc.right - rc.left;
+	int percent;
 	if (Config.ChargeIndicator && IsCharging(sps))
-		batPercent = ChargeXOfs;
+		percent = ChargeXOfs;
 	else
-		batPercent = sps.BatteryLifePercent;
+		percent = sps.BatteryLifePercent;
 
-	int x = (int) (rc.left + (batPercent * (rc.right - rc.left) / 100.0));
-	DrawSolidRect(hDC, rc.left, rc.top, x, rc.bottom, clrFg);
-	DrawSolidRect(hDC, x, rc.top, rc.right, rc.bottom, clrBg);
+	int x = (int) (rc.left + (percent * wd / 100.0));
+	RECT rcFg = { rc.left, rc.top, x, rc.bottom };
+	IntersectRect(&r, &rcFg, &rcClip);
+	DrawSolidRect(hDC, r.left, r.top, r.right, r.bottom, clrFg);
+
+	RECT rcBg = { x, rc.top, rc.right, rc.bottom };
+	IntersectRect(&r, &rcBg, &rcClip);
+	DrawSolidRect(hDC, r.left, r.top, r.right, r.bottom, clrBg);
 }
 
-void DrawGradRect(HDC hDC, int left, int top, int right, int bottom, COLORREF clr1, COLORREF clr2, int wd = -1) {
+void DrawGradRect(HDC hDC, int left, int top, int right, int bottom, COLORREF clr1, COLORREF clr2, int st = 0, int wd = -1) {
 	int r1 = GetRValue(clr1);
 	int g1 = GetGValue(clr1);
 	int b1 = GetBValue(clr1);
@@ -652,18 +659,18 @@ void DrawGradRect(HDC hDC, int left, int top, int right, int bottom, COLORREF cl
 
 	if (wd == -1)
 		wd = w;
-	for (int i = 0; i <= w; i++) {
-		int r = r1 + (i * (r2-r1) / wd);
-		int g = g1 + (i * (g2-g1) / wd);
-		int b = b1 + (i * (b2-b1) / wd);
+	for (int i = left, j = st; i <= right; i++, j++) {
+		int r = r1 + (j * (r2-r1) / wd);
+		int g = g1 + (j * (g2-g1) / wd);
+		int b = b1 + (j * (b2-b1) / wd);
 		COLORREF rgb = RGB(r, g, b);
 
 		HPEN pen = CreatePen(PS_SOLID, 1, rgb);
 		HGDIOBJ oldPenStep = SelectObject(hDC, pen);
 
 		POINT pts[] = {
-			{ left + i, top },
-			{ left + i, bottom },
+			{ i, top },
+			{ i, bottom },
 		};
 		Polyline(hDC, pts, countof(pts));
 
@@ -672,92 +679,103 @@ void DrawGradRect(HDC hDC, int left, int top, int right, int bottom, COLORREF cl
 	}
 }
 
-void DrawGradient(HDC hDC, RECT &rc, SYSTEM_POWER_STATUS_EX2 &sps) {
+void DrawGradient(HDC hDC, RECT &rc, RECT &rcClip, SYSTEM_POWER_STATUS_EX2 &sps) {
 	int wd = rc.right - rc.left;
 	int batPercent;
 
 	int batState = GetBatteryState(sps);
-	switch (batState) {
-		case BATTERY_STATE_ON_AC:
-		case BATTERY_STATE_CHARGING: {
-			if (Config.ChargeIndicator && IsCharging(sps))
-				batPercent = ChargeXOfs;
+	if (batState == BATTERY_STATE_ON_AC ||
+		(batState == BATTERY_STATE_CHARGING && !Config.ChargeIndicator))
+	{
+		batPercent = sps.BatteryLifePercent;
+		int halfX = (int) (rc.left + (wd * (batPercent / 2) / 100.0));
+		int batX = (int) (rc.left + (batPercent * wd / 100.0));
+
+		COLORREF clr1;
+		if (batState == BATTERY_STATE_ON_AC)
+			clr1 = Config.ClrFgAC;
+		else
+			clr1 = Config.ClrFgCharging;
+		double h, s, l;
+		rgb2hsl(clr1, h, s, l);
+		l = 0.8;
+		COLORREF clr2 = hsl2rgb(h, s, l);
+		int w = halfX - rc.left;
+
+		RECT r;
+		RECT rcP[] = {
+			{ rc.left, rc.top, halfX, rc.bottom },
+			{ halfX, rc.top, batX, rc.bottom }
+		};
+
+		IntersectRect(&r, &rcP[0], &rcClip);
+		DrawGradRect(hDC, r.left, r.top, r.right, r.bottom, clr1, clr2, r.left - rc.left, w);
+
+		IntersectRect(&r, &rcP[1], &rcClip);
+		DrawGradRect(hDC, r.left, r.top, r.right, r.bottom, clr2, clr1, r.left - halfX, w);
+
+		// bg
+		RECT rcBg = { batX, rc.top, rc.right, rc.bottom };
+		IntersectRect(&r, &rcBg, &rcClip);
+		DrawSolidRect(hDC, r.left, r.top, r.right, r.bottom, Config.ClrBgCharging);
+	}
+	else {
+		RECT r;
+		int critX = (int) (rc.left + (wd * Config.CriticalLevel / 100.0));
+		int lowX = (int) (rc.left + (wd * Config.LowLevel / 100.0));
+
+		if (Config.ChargeIndicator && IsCharging(sps))
+			batPercent = ChargeXOfs;
+		else
+			batPercent = sps.BatteryLifePercent;
+
+		COLORREF clrFg, clrBg;
+		int batX = (int) (rc.left + (batPercent * wd / 100.0));
+		int left = rcClip.left;
+
+		RECT rcCrit = { rc.left, rc.top, min(critX, batX), rc.bottom };
+		IntersectRect(&r, &rcCrit, &rcClip);
+
+		if (batState == BATTERY_STATE_CRITICAL) {
+			if (Config.BlinkingCritical && BlinkState == 1)
+				clrFg = Config.ClrBgCritical;
 			else
-				batPercent = sps.BatteryLifePercent;
-
-			int halfX = (int) (rc.left + (wd * (batPercent / 2) / 100.0));
-			int batX = (int) (rc.left + (batPercent * wd / 100.0));
-
-			COLORREF clr1;
-			if (batState == BATTERY_STATE_ON_AC)
-				clr1 = Config.ClrFgAC;
-			else
-				clr1 = Config.ClrFgCharging;
-			double h, s, l;
-			rgb2hsl(clr1, h, s, l);
-			l = 0.8;
-			COLORREF clr2 = hsl2rgb(h, s, l);
-
-			DrawGradRect(hDC, rc.left, rc.top, halfX, rc.bottom, clr1, clr2);
-			DrawGradRect(hDC, halfX, rc.top, batX, rc.bottom, clr2, clr1);
-
-			// bg
-			DrawSolidRect(hDC, batX, rc.top, rc.right, rc.bottom, Config.ClrBgCharging);
-			} break;
-
-		default: {
-			int critX = (int) (rc.left + (wd * Config.CriticalLevel / 100.0));
-			int lowX = (int) (rc.left + (wd * Config.LowLevel / 100.0));
-			int x, lastX;
-
-			if (Config.ChargeIndicator && IsCharging(sps))
-				batPercent = ChargeXOfs;
-			else
-				batPercent = sps.BatteryLifePercent;
-
-			COLORREF clrFg, clrBg;
-			int batX = (int) (rc.left + (batPercent * wd / 100.0));
-			x = min(batX, critX);
-			if (batState == BATTERY_STATE_CRITICAL) {
-				if (Config.BlinkingCritical && BlinkState == 1)
-					clrFg = Config.ClrBgCritical;
-				else
-					clrFg = Config.ClrFgCritical;
-				clrBg = Config.ClrBgCritical;
-			}
-			else {
 				clrFg = Config.ClrFgCritical;
-				clrBg = Config.ClrBg;
-			}
-			DrawSolidRect(hDC, rc.left, rc.top, x, rc.bottom, clrFg);
-			lastX = x;
+			clrBg = Config.ClrBgCritical;
+		}
+		else {
+			clrFg = Config.ClrFgCritical;
+			clrBg = Config.ClrBg;
+		}
 
-			if (batX > critX) {
-				x = min(batX, lowX);
-				int w = wd * (Config.LowLevel - Config.CriticalLevel) / 100;
-				DrawGradRect(hDC, lastX, rc.top, x, rc.bottom, Config.ClrFgCritical, Config.ClrFgLow, w);
-				clrBg = Config.ClrBgLow;
+		DrawSolidRect(hDC, r.left, r.top, r.right, r.bottom, clrFg);
 
-				lastX = x;
-			}
+		if (batX > critX) {
+			RECT rcLow = { critX, rc.top, min(lowX, batX), rc.bottom };
+			IntersectRect(&r, &rcLow, &rcClip);
 
-			// 2nd part
-			if (batX > lowX) {
-				x = min(batX, rc.right);
-				int w = wd * (100 - Config.LowLevel) / 100;
-				DrawGradRect(hDC, lastX, rc.top, x, rc.bottom, Config.ClrFgLow, Config.ClrFg, w);
-				clrBg = Config.ClrBg;
-				lastX = x;
-			}
+			int w = wd * (Config.LowLevel - Config.CriticalLevel) / 100;
+			DrawGradRect(hDC, r.left, r.top, r.right, r.bottom, Config.ClrFgCritical, Config.ClrFgLow, r.left - critX, w);
+		}
 
+		if (batX > lowX) {
+			RECT rcNorm = { lowX, rc.top, min(rc.left, batX), rc.bottom };
+			IntersectRect(&r, &rcNorm, &rcClip);
+
+			int w = wd * (100 - Config.LowLevel) / 100;
+			DrawGradRect(hDC, r.left, r.top, r.right, r.bottom, Config.ClrFgLow, Config.ClrFg, r.left - lowX, w);
+		}
+
+		if (batX < rc.right) {
 			// bg
-			DrawSolidRect(hDC, lastX, rc.top, rc.right, rc.bottom, clrBg);
+			RECT rcBg = { batX, rc.top, rc.right, rc.bottom };
+			IntersectRect(&r, &rcBg, &rcClip);
+			DrawSolidRect(hDC, r.left, r.top, r.right, r.bottom, clrBg);
 		}
 	}
-
 }
 
-void Paint(HDC hDC, RECT &rc, SYSTEM_POWER_STATUS_EX2 &sps) {
+void Paint(HDC hDC, RECT &rc, RECT &rcClip, SYSTEM_POWER_STATUS_EX2 &sps) {
 //	int saveDC = SaveDC(hDC);
 
 	if (sps.BatteryLifePercent >= 0 && sps.BatteryLifePercent <= 100)
@@ -784,10 +802,10 @@ void Paint(HDC hDC, RECT &rc, SYSTEM_POWER_STATUS_EX2 &sps) {
 	}
 
 	if (Config.GradientIndicator)
-		DrawGradient(hDC, rc, sps);
+		DrawGradient(hDC, rc, rcClip, sps);
 	else
-		DrawFlat(hDC, rc, sps);
-		
+		DrawFlat(hDC, rc, rcClip, sps);
+
 	// steps
 	if (Config.ShowPercentageSteps) {
 		int batPercent;
@@ -800,26 +818,28 @@ void Paint(HDC hDC, RECT &rc, SYSTEM_POWER_STATUS_EX2 &sps) {
 		for (int i = 0; i <= batPercent; i += Config.PercentageStep) {
 			int x = rc.left + (int) (i * onePercent);
 
-			POINT pts[] = {
-				{ x, rc.top },
-				{ x, rc.bottom },
-			};
+			if (rcClip.left <= x && x <= rcClip.right) {
+				POINT pts[] = {
+					{ x, rc.top },
+					{ x, rc.bottom },
+				};
 
-			COLORREF c = GetPixel(hDC, x, rc.top);
-			
-			double h, s, l;
-			rgb2hsl(c, h, s, l);
+				COLORREF c = GetPixel(hDC, x, rc.top);
 
-			l = l * 2 / 3.0;
-			c = hsl2rgb(h, s, l);
+				double h, s, l;
+				rgb2hsl(c, h, s, l);
 
-			HPEN penStep = CreatePen(PS_SOLID, 1, c);
-			HGDIOBJ oldPenStep = SelectObject(hDC, penStep);
+				l = l * 2 / 3.0;
+				c = hsl2rgb(h, s, l);
 
-			Polyline(hDC, pts, countof(pts));
+				HPEN penStep = CreatePen(PS_SOLID, 1, c);
+				HGDIOBJ oldPenStep = SelectObject(hDC, penStep);
 
-			SelectObject(hDC, oldPenStep);
-			DeleteObject(penStep);
+				Polyline(hDC, pts, countof(pts));
+
+				SelectObject(hDC, oldPenStep);
+				DeleteObject(penStep);
+			}
 		}
 	}
 
@@ -838,11 +858,13 @@ void OnPaint(HWND hWnd) {
 	RECT rc;
 	GetClientRect(hWnd, &rc);
 
-	int wd = rc.right - rc.left;
-	int ht = rc.bottom - rc.top;
+	RECT rcClip;
+	GetClipBox(hDC, &rcClip);
+	Paint(OffscreenDC, rc, rcClip, SPS);
 
-	Paint(OffscreenDC, rc, SPS);
-	BitBlt(hDC, 0, 0, wd, ht, OffscreenDC, 0, 0, SRCCOPY);
+	int wd = rcClip.right - rcClip.left;
+	int ht = rcClip.bottom - rcClip.top;
+	BitBlt(hDC, rcClip.left, rcClip.top, wd, ht, OffscreenDC, rcClip.left, rcClip.top, SRCCOPY);
 
 	EndPaint(hWnd, &ps);
 }
@@ -853,11 +875,12 @@ void OnPaint(HWND hWnd) {
 void OnPaintOnTop() {
 	// paint
 	RECT rc = { SCALEX(Config.LeftMargin), 0, GetDeviceCaps(ScreenDC, HORZRES), SCALEY(Config.Height) };
+	RECT rcClip = rc;
 
 	int wd = rc.right - rc.left;
 	int ht = rc.bottom - rc.top;
 
-	Paint(OffscreenDC, rc, SPS);
+	Paint(OffscreenDC, rc, rcClip, SPS);
 	BitBlt(ScreenDC, 0, 0, wd, ht, OffscreenDC, 0, 0, SRCCOPY);
 }
 
@@ -906,11 +929,11 @@ void CheckEvents() {
 	// charging started
 	if (!IsCharging(LastSPS) && IsCharging(SPS)) {
 		ExecuteSoundEvent(&Config.SoundEvents[SOUND_EVENT_CHARGING_STARTED]);
-		BattiInvalidateRect(HMain, NULL, TRUE);
 
 		// start charging timer
 		ChargeXOfs = 0;
 		SetTimer(HMain, ChargeTimer, CHARGE_INTERVAL, NULL);
+		BattiInvalidateRect(HMain, NULL, TRUE);
 	}
 
 	// charging stopped
@@ -918,10 +941,10 @@ void CheckEvents() {
 		// battery charged
 		if (SPS.BatteryLifePercent == 100) {
 			ExecuteSoundEvent(&Config.SoundEvents[SOUND_EVENT_BATERY_CHARGED]);
-			BattiInvalidateRect(HMain, NULL, TRUE);
 		}
 
 		KillTimer(HMain, ChargeTimer);
+		BattiInvalidateRect(HMain, NULL, TRUE);
 
 /*		// charging ends -> empty the predict buffer
 		T = 0;
@@ -945,7 +968,14 @@ void CheckEvents() {
 
 	if (LastSPS.BatteryLifePercent != SPS.BatteryLifePercent) {
 		// redraw
-		BattiInvalidateRect(HMain, NULL, TRUE);
+		RECT rc;
+		GetClientRect(HMain, &rc);
+		int wd = rc.right - rc.left;
+
+		rc.left = (wd * (LastSPS.BatteryLifePercent)) / 100;
+		rc.right = (wd * (SPS.BatteryLifePercent)) / 100;
+
+		BattiInvalidateRect(HMain, &rc, TRUE);
 	}
 
 	LastSPS = SPS;
@@ -984,6 +1014,7 @@ int OnTimer(UINT timerId) {
 	else if (timerId == ChargeTimer) {
 		if (Config.ChargeIndicator && IsCharging(SPS)) {
 			// charging
+			int tmp = ChargeXOfs;
 			ChargeXOfs += 5;
 			if (ChargeXOfs >= SPS.BatteryLifePercent + 5)
 				ChargeXOfs = 0;
@@ -991,11 +1022,19 @@ int OnTimer(UINT timerId) {
 				// show the last (incomplete) step
 				ChargeXOfs = SPS.BatteryLifePercent;
 
-			BattiInvalidateRect(HMain, NULL, TRUE);
-		}
-		else {
-			ChargeXOfs = 0;
-			BattiInvalidateRect(HMain, NULL, TRUE);
+			RECT rc;
+			GetClientRect(HMain, &rc);
+			int wd = rc.right - rc.left;
+
+			if (tmp < ChargeXOfs) {
+				rc.left = (wd * tmp) / 100;
+				rc.right = (wd * ChargeXOfs) / 100;
+			}
+			else {
+				rc.left = (wd * ChargeXOfs) / 100;
+				rc.right = (wd * tmp) / 100;
+			}
+			BattiInvalidateRect(HMain, &rc, FALSE);
 		}
 
 		return 0;
@@ -1004,7 +1043,13 @@ int OnTimer(UINT timerId) {
 		if (SPS.ACLineStatus == 0 && SPS.BatteryLifePercent <= Config.CriticalLevel) {
 			// we are in the critical level and not on AC power source
 			BlinkState = (BlinkState + 1) % 2;
-			BattiInvalidateRect(HMain, NULL, TRUE);
+
+			RECT rc;
+			GetClientRect(HMain, &rc);
+			int wd = rc.right - rc.left;
+			rc.right = (wd * SPS.BatteryLifePercent) / 100;
+
+			BattiInvalidateRect(HMain, &rc, TRUE);
 		}
 		return 0;
 	}
@@ -1164,14 +1209,14 @@ LRESULT OnTrayNotify(WPARAM wParam, LPARAM lParam) {
 			pos.y -= SCALEY(20);
 		ReleaseDC(NULL, hdc);
 
-		::SetForegroundWindow(NID.hWnd);  
+		::SetForegroundWindow(NID.hWnd);
 		::TrackPopupMenu(hSubMenu, TPM_RIGHTALIGN | TPM_BOTTOMALIGN, pos.x, pos.y, 0, HMain, NULL);
 
 		// BUGFIX: See "PRB: Menus for Notification Icons Don't Work Correctly"
 //		::PostMessage(HMain, WM_NULL, 0, 0);
 
 		DestroyMenu(hMenu);
-	} 
+	}
 
 	return 1;
 }
