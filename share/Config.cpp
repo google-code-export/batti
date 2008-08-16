@@ -18,10 +18,8 @@
  *
  */
 
-//#include "stdafx.h"
 #include <windows.h>
 #include "Config.h"
-//#include "defs.h"
 #include "regs.h"
 
 CConfig Config;
@@ -238,7 +236,7 @@ void CConfig::Load() {
 				HKEY hEvent;
 				if (RegOpenKeyEx(hSoundEvents, sEvent, 0, 0, &hEvent) == ERROR_SUCCESS) {
 					SoundEvents[i].Enabled = RegReadDword(hEvent, szEnabled, FALSE);
-					
+
 					delete [] SoundEvents[i].FileName;
 					SoundEvents[i].FileName = RegReadString(hEvent, szFileName, _T(""));
 
@@ -266,7 +264,7 @@ void CConfig::LoadCoefs() {
 		// correction coefficients
 		CVoltage = RegReadCoef(hApp, szCVoltage);
 		CTemp = RegReadCoef(hApp, szCTemp);
-		CBackupVoltage = RegReadCoef(hApp, szCBackupVoltage);		
+		CBackupVoltage = RegReadCoef(hApp, szCBackupVoltage);
 
 		RegCloseKey(hApp);
 	}
