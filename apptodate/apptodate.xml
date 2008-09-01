@@ -1,8 +1,8 @@
 <application>
 	<name>Batti</name>
-	<version>2.3</version>
+	<version>2.4</version>
 	<description>Batti is a small battery indicator.</description>
 	<versionurl>http://batti.googlecode.com/svn/trunk/apptodate/apptodate.xml</versionurl>
-	<caburl>http://batti.googlecode.com/files/Batti-2.3.cab</caburl>
+	<caburl>http://batti.googlecode.com/files/Batti-2.4.cab</caburl>
 </application>
 
