@@ -210,17 +210,17 @@ BEGIN
     CTEXT           "Color",IDC_C_COLOR2,4,120,49,10,NOT WS_VISIBLE
 END
 
-IDD_BATTICFG_ABOUT DIALOG DISCARDABLE  0, 0, 160, 165
+IDD_BATTICFG_ABOUT DIALOGEX 0, 0, 160, 165
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW | 0x80000000L
 CAPTION "About"
 FONT 8, "Tahoma"
 BEGIN
-    ICON            IDI_BATTI,IDC_STATIC,135,5,21,20
-    LTEXT           "Batti 2.3",IDC_STATIC,5,8,115,10
+    ICON            IDI_BATTI,IDC_STATIC,135,5,20,20
+    LTEXT           "Batti 2.4",IDC_STATIC,5,8,115,10
     LTEXT           "Copyright (c) 2005 - 2008",IDC_STATIC,5,23,115,10
     LTEXT           "David Andrš",IDC_STATIC,5,33,115,10
-    RTEXT           "http://pda.jasnapaka.com/batti/",IDC_HOMEPAGE_LINK,5,124,
+    RTEXT           "http://batti.googlecode.com/",IDC_HOMEPAGE_LINK,5,124,
                     151,10,SS_NOTIFY
 END
 
@@ -293,7 +293,7 @@ BEGIN
                     13,12
 END
 
-IDD_LICENSE DIALOGEX 0, 0, 160, 165
+IDD_LICENSE DIALOG DISCARDABLE  0, 0, 160, 165
 STYLE DS_MODALFRAME | WS_CHILD | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW | 0x80000000L
 CAPTION "License"
@@ -312,8 +312,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,3,0,0
- PRODUCTVERSION 2,3,0,0
+ FILEVERSION 2,4,0,0
+ PRODUCTVERSION 2,4,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -331,14 +331,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "David Andrs\0"
             VALUE "FileDescription", "Batti Config\0"
-            VALUE "FileVersion", "2, 3, 0, 0\0"
+            VALUE "FileVersion", "2, 4, 0, 0\0"
             VALUE "InternalName", "batticfg\0"
             VALUE "LegalCopyright", "Copyright © 2005 - 2008\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "batticfg.exe\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Batti Config\0"
-            VALUE "ProductVersion", "2, 3, 0, 0\0"
+            VALUE "ProductVersion", "2, 4, 0, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
