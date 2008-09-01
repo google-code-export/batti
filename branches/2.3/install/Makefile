@@ -4,7 +4,7 @@
 #
 
 PRODUCT=Batti
-VERSION=2.3
+VERSION=2.4
 INF=Batti.inf
 
 CABWIZ="c:/program files/windows ce tools/wce420/pocket pc 2003/tools/cabwiz.exe"
