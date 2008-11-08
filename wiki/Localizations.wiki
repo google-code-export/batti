@@ -14,13 +14,14 @@
 || http://pda.jasnapaka.com/gfx/flags/macedonian.gif || Macedonian || [http://batti.googlecode.com/svn/trunk/lang/macedonian.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/polish.gif     || Polish || [http://batti.googlecode.com/svn/branches/2.3/lang/polish.lng Download]  || 2.3 ||
 || http://pda.jasnapaka.com/gfx/flags/portuguese.gif || Portuguese || [http://batti.googlecode.com/svn/trunk/lang/portuguese.lng Download]  || 2.1 ||
-|| http://pda.jasnapaka.com/gfx/flags/russian.gif    || Russian || [http://batti.googlecode.com/svn/trunk/lang/russian.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/russian.gif    || Russian || [http://batti.googlecode.com/svn/trunk/lang/russian.lng Download]  || 2.4 ||
 || http://pda.jasnapaka.com/gfx/flags/slovakian.gif     || Slovakian || [http://batti.googlecode.com/svn/trunk/lang/slovak.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/spanish.gif    || Spanish || [http://batti.googlecode.com/svn/branches/2.3/lang/spanish.lng Download]  || 2.3 ||
 || http://pda.jasnapaka.com/gfx/flags/swedish.gif    || Swedish || [http://batti.googlecode.com/svn/branches/2.3/lang/swedish.lng Download]  || 2.3 ||
 || http://pda.jasnapaka.com/gfx/flags/thai.gif       || Thai || [http://batti.googlecode.com/svn/trunk/lang/thai.lng Download]  || 1.4.1 ||
 || http://pda.jasnapaka.com/gfx/flags/turkish.gif    || Turkish || [http://batti.googlecode.com/svn/trunk/lang/turkish.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/ukrainian.gif  || Ukrainian || [http://batti.googlecode.com/svn/trunk/lang/ukrainian.lng Download]  || 2.1 ||
+|| http://pda.jasnapaka.com/gfx/flags/vietnamese.gif  || Vietnamese || [http://batti.googlecode.com/svn/trunk/lang/vietnamese.lng Download]  || 2.4 ||
 
 
 == How to Use Localization file ==
