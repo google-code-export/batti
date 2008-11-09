@@ -8,7 +8,7 @@
 || http://pda.jasnapaka.com/gfx/flags/chinese.gif      || Chinese (traditional) || [http://batti.googlecode.com/svn/trunk/lang/chinese-traditional.lng Download]  || 2.4 ||
 || http://pda.jasnapaka.com/gfx/flags/czech.gif      || Czech || [http://batti.googlecode.com/svn/branches/2.3/lang/czech.lng Download]  || 2.3 ||
 || http://pda.jasnapaka.com/gfx/flags/dutch.gif      || Dutch || [http://batti.googlecode.com/svn/branches/2.3/lang/dutch.lng Download]  || 2.3 ||
-|| http://pda.jasnapaka.com/gfx/flags/french.gif     || French || [http://batti.googlecode.com/svn/trunk/lang/french.lng Download]  || 2.0 ||
+|| http://pda.jasnapaka.com/gfx/flags/french.gif     || French || [http://batti.googlecode.com/svn/trunk/lang/french.lng Download]  || 2.4 ||
 || http://pda.jasnapaka.com/gfx/flags/german.gif     || German || [http://batti.googlecode.com/svn/branches/2.3/lang/german.lng Download]  || 2.3 ||
 || http://pda.jasnapaka.com/gfx/flags/hungarian.gif  || Hungarian || [http://batti.googlecode.com/svn/trunk/lang/hungarian.lng Download]  || 2.1 ||
 || http://pda.jasnapaka.com/gfx/flags/italian.gif    || Italian || [http://batti.googlecode.com/svn/trunk/lang/italian.lng Download]  || 2.1 ||
