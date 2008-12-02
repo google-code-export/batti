@@ -7,7 +7,7 @@
 ==Installing Zipped CAB File==
 
   # Before installing, make sure that your device meets [SystemRequirements system requirements].
-  # Download and unzip *Batti*.
+  # [http://code.google.com/p/batti/downloads/list Download] and unzip *Batti*.
   # Upload unzipped *cab file* to your PocketPC.
   # Tap the *cab file* on your PocketPC to install.
 
